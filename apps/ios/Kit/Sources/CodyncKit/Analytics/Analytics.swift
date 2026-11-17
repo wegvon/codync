@@ -38,7 +38,8 @@ public final class Analytics {
     }
 
     nonisolated static let endpoint = URL(string: "https://us.i.posthog.com/batch/")!
-    static let apiKey = "phc_rQHvxdSFKnMquPfMjmiMhXhM4tqJ5qCYsWuVEoFxCCWX"
+    /// A fork sets `CodyncPostHogKey` to its own key, or to `off` for none.
+    static let apiKey = AppEnvironment.info("CodyncPostHogKey") ?? "phc_rQHvxdSFKnMquPfMjmiMhXhM4tqJ5qCYsWuVEoFxCCWX"
     /// `Bool`, absent = on.
     public static let enabledKey = "analyticsEnabled"
     private static let installKey = "analyticsInstallID"
@@ -69,7 +70,7 @@ public final class Analytics {
         lastLaunchSession = defaults.string(forKey: Self.sessionKey)
     }
 
-    public var isEnabled: Bool { defaults.object(forKey: Self.enabledKey) as? Bool ?? true }
+    public var isEnabled: Bool { Self.apiKey != "off" && (defaults.object(forKey: Self.enabledKey) as? Bool ?? true) }
 
     /// Turning it off drops everything not yet sent.
     public func setEnabled(_ enabled: Bool) {

@@ -98,7 +98,7 @@ private enum ComputerOS: Hashable { case mac, linux }
 
 private struct InstallPage: View {
     /// The website: its first button downloads for whatever the computer runs.
-    private static let websiteLink = "https://www.codync.dev"
+    private static let websiteLink = "https://github.com/wegvon/irgatos"
 
     @Binding var os: ComputerOS
     let next: () -> Void

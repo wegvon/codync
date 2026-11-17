@@ -5,6 +5,8 @@
     <key>CodyncEnvironment</key><string>$(CODYNC_ENV)</string>
     <key>CodyncAppGroup</key><string>$(CODYNC_APP_GROUP)</string>
     <key>CodyncURLScheme</key><string>$(CODYNC_URL_SCHEME)</string>
+    <key>CodyncPostHogKey</key><string>$(CODYNC_POSTHOG_KEY)</string>
+    <key>CodyncPushRelayURL</key><string>$(CODYNC_PUSH_RELAY_URL)</string>
     <key>CodyncAPNSEnvironment</key><string>$(CODYNC_APNS_ENVIRONMENT)</string>
 	<key>CodyncKeychainGroup</key>
 	<string>$(AppIdentifierPrefix)$(CODYNC_KEYCHAIN_GROUP)</string>

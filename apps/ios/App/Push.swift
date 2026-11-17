@@ -14,6 +14,8 @@ private var apnsEnvironment: String {
 
 /// Turns an APNs token into a relay ticket (see relay/src/index.ts).
 private func relayTicket(token: Data, kind: String) async throws -> String {
+    // A build without a push relay (a fork before it has one) registers nothing.
+    guard !SharedStore.relayURL.isEmpty else { throw URLError(.unsupportedURL) }
     struct Body: Encodable { var token: String; var env: String; var kind: String; var bundleId: String }
     struct Res: Decodable { var ticket: String }
     var req = URLRequest(url: URL(string: "\(SharedStore.relayURL)/register")!)

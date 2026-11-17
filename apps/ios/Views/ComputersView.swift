@@ -286,7 +286,7 @@ private struct CodyncVersionRow: View {
                 Image(systemName: "arrow.down.circle").font(.system(size: 17)).frame(width: 26)
                 VStack(alignment: .leading, spacing: 3) {
                     HStack(spacing: 8) {
-                        Text(verbatim: "Codync")
+                        Text(verbatim: L10n.branded("Codync"))
                         Text(verbatim: line.version).foregroundStyle(Palette.secondary).monospacedDigit()
                     }
                     if !line.detail.isEmpty {

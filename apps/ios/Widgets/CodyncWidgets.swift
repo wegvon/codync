@@ -93,7 +93,7 @@ struct BotsWidgetView: View {
         if !entry.paired {
             switch family {
             case .accessoryInline:
-                Text("Connect Codync to your computer")
+                Text(L10n.tr("Connect Codync to your computer"))
             case .accessoryCircular:
                 Image(systemName: "desktopcomputer")
                     .accessibilityLabel("Connect Codync to your computer")

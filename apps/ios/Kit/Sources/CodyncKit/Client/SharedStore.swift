@@ -9,7 +9,12 @@ private let log = Logger(subsystem: "com.pokai.Codync", category: "Account")
 public enum SharedStore {
     public static let appGroup = AppEnvironment.current.appGroup
     /// The APNs push relay (relay/ in this repo).
-    public static let relayURL = "https://codync-relay.kevin2005ha.workers.dev"
+    /// The push relay (`relay/`); a fork sets `CodyncPushRelayURL` to its own, or `none` for no push.
+    public static let relayURL: String = switch AppEnvironment.info("CodyncPushRelayURL") {
+    case "none": ""
+    case let url?: url
+    case nil: "https://codync-relay.kevin2005ha.workers.dev"
+    }
 
     private static var defaults: UserDefaults { UserDefaults(suiteName: appGroup) ?? .standard }
 

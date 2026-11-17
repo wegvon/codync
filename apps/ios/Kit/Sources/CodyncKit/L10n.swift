@@ -145,9 +145,21 @@ public enum L10n {
         guard let tables = tables(preference: preference, systemIsChinese: systemIsChinese, systemLanguages: systemLanguages) else {
             return key
         }
-        if let hit = phrase(key, primary: tables.primary, fallback: tables.fallback) { return hit }
+        if let hit = phrase(key, primary: tables.primary, fallback: tables.fallback) { return branded(hit) }
         let trimmed = key.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed == key ? key : (phrase(trimmed, primary: tables.primary, fallback: tables.fallback) ?? key)
+        return branded(trimmed == key ? key : (phrase(trimmed, primary: tables.primary, fallback: tables.fallback) ?? key))
+    }
+
+    /// A fork's own name (its `CFBundleDisplayName`, without " Dev") where the text says Codync.
+    static let brand: String? = {
+        guard let name = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String else { return nil }
+        let base = name.replacingOccurrences(of: " Dev", with: "")
+        return base.isEmpty || base == "Codync" ? nil : base
+    }()
+
+    public static func branded(_ text: String) -> String {
+        guard let brand, text.contains("Codync") else { return text }
+        return text.replacingOccurrences(of: "Codync", with: brand)
     }
 
     /// Simplified, Traditional, or neither. A missing Traditional line falls back to Simplified.

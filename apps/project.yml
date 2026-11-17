@@ -1,7 +1,7 @@
 # Generate the Xcode project with: xcodegen generate --spec apps/project.yml
 name: Codync
 options:
-  bundleIdPrefix: com.pokai
+  bundleIdPrefix: com.wegvon.irgatos
   deploymentTarget:
     iOS: "26.0"
     macOS: "14.0"
@@ -30,18 +30,22 @@ settings:
     SWIFT_VERSION: "6.0"
     SWIFT_STRICT_CONCURRENCY: complete
     CODE_SIGN_STYLE: Automatic
-    DEVELOPMENT_TEAM: 7FUM8A8H72
+    # Irgatos: your Apple Developer team id (Xcode › Settings › Accounts), needed to sign.
+    DEVELOPMENT_TEAM: ""
     DEAD_CODE_STRIPPING: YES
     ENABLE_USER_SCRIPT_SANDBOXING: NO
     CODYNC_ENV: main
-    CODYNC_APP_NAME: Codync
-    CODYNC_IOS_BUNDLE_ID: com.pokai.Codync.ios
-    CODYNC_APP_GROUP: group.com.pokai.Codync
-    CODYNC_KEYCHAIN_GROUP: com.pokai.Codync
-    CODYNC_URL_SCHEME: codync
-    CODYNC_SCREEN_NAME: CodyncScreen
-    CODYNC_SCREEN_BUNDLE_ID: com.pokai.Codync.screen
-    CODYNC_DATA_FOLDER: .codync
+    CODYNC_APP_NAME: Irgatos
+    CODYNC_IOS_BUNDLE_ID: com.wegvon.irgatos.ios
+    CODYNC_APP_GROUP: group.com.wegvon.irgatos
+    CODYNC_KEYCHAIN_GROUP: com.wegvon.irgatos
+    CODYNC_URL_SCHEME: irgatos
+    CODYNC_SCREEN_NAME: IrgatosScreen
+    CODYNC_SCREEN_BUNDLE_ID: com.wegvon.irgatos.screen
+    CODYNC_DATA_FOLDER: .irgatos
+    # Irgatos: no analytics (`off`), and push through our own relay once it exists (`none` until then).
+    CODYNC_POSTHOG_KEY: "off"
+    CODYNC_PUSH_RELAY_URL: none
   configs:
     Debug:
       CODYNC_APNS_ENVIRONMENT: sandbox
@@ -49,25 +53,25 @@ settings:
       CODYNC_APNS_ENVIRONMENT: production
     DevDebug:
       CODYNC_ENV: dev
-      CODYNC_APP_NAME: Codync Dev
-      CODYNC_IOS_BUNDLE_ID: com.pokai.Codync.ios.dev
-      CODYNC_APP_GROUP: group.com.pokai.Codync.dev
-      CODYNC_KEYCHAIN_GROUP: com.pokai.Codync.dev
-      CODYNC_URL_SCHEME: codync-dev
-      CODYNC_SCREEN_NAME: CodyncDevScreen
-      CODYNC_SCREEN_BUNDLE_ID: com.pokai.Codync.dev.screen
-      CODYNC_DATA_FOLDER: .codync-dev
+      CODYNC_APP_NAME: Irgatos Dev
+      CODYNC_IOS_BUNDLE_ID: com.wegvon.irgatos.ios.dev
+      CODYNC_APP_GROUP: group.com.wegvon.irgatos.dev
+      CODYNC_KEYCHAIN_GROUP: com.wegvon.irgatos.dev
+      CODYNC_URL_SCHEME: irgatos-dev
+      CODYNC_SCREEN_NAME: IrgatosDevScreen
+      CODYNC_SCREEN_BUNDLE_ID: com.wegvon.irgatos.dev.screen
+      CODYNC_DATA_FOLDER: .irgatos-dev
       CODYNC_APNS_ENVIRONMENT: sandbox
     DevRelease:
       CODYNC_ENV: dev
-      CODYNC_APP_NAME: Codync Dev
-      CODYNC_IOS_BUNDLE_ID: com.pokai.Codync.ios.dev
-      CODYNC_APP_GROUP: group.com.pokai.Codync.dev
-      CODYNC_KEYCHAIN_GROUP: com.pokai.Codync.dev
-      CODYNC_URL_SCHEME: codync-dev
-      CODYNC_SCREEN_NAME: CodyncDevScreen
-      CODYNC_SCREEN_BUNDLE_ID: com.pokai.Codync.dev.screen
-      CODYNC_DATA_FOLDER: .codync-dev
+      CODYNC_APP_NAME: Irgatos Dev
+      CODYNC_IOS_BUNDLE_ID: com.wegvon.irgatos.ios.dev
+      CODYNC_APP_GROUP: group.com.wegvon.irgatos.dev
+      CODYNC_KEYCHAIN_GROUP: com.wegvon.irgatos.dev
+      CODYNC_URL_SCHEME: irgatos-dev
+      CODYNC_SCREEN_NAME: IrgatosDevScreen
+      CODYNC_SCREEN_BUNDLE_ID: com.wegvon.irgatos.dev.screen
+      CODYNC_DATA_FOLDER: .irgatos-dev
       CODYNC_APNS_ENVIRONMENT: production
 schemes:
   iOS:
@@ -188,7 +192,7 @@ targets:
         INFOPLIST_KEY_NSCameraUsageDescription: Scan the pairing code shown on your computer.
         INFOPLIST_KEY_NSMicrophoneUsageDescription: Talk to your bots in a voice call.
         INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: Your words are transcribed on this iPhone and sent to your bot as a message.
-        INFOPLIST_KEY_NSLocalNetworkUsageDescription: Codync connects to the computer running your bots on your local network.
+        INFOPLIST_KEY_NSLocalNetworkUsageDescription: Irgatos connects to the Mac running your agents on your local network.
         # Portrait everywhere except the screen viewer (AppDelegate + OrientationLock).
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
@@ -233,7 +237,7 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         CODE_SIGN_ENTITLEMENTS: ios/Share/Share.entitlements
         INFOPLIST_KEY_CFBundleDisplayName: $(CODYNC_APP_NAME)
-        INFOPLIST_KEY_NSLocalNetworkUsageDescription: Codync connects to the computer running your bots on your local network.
+        INFOPLIST_KEY_NSLocalNetworkUsageDescription: Irgatos connects to the Mac running your agents on your local network.
         TARGETED_DEVICE_FAMILY: "1,2"
         SKIP_INSTALL: YES
   # Opens end-to-end sealed alert text (spec §6.7) with this account's push key from the shared Keychain.
